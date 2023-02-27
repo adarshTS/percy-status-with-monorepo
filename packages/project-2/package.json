@@ -1,0 +1,16 @@
+{
+  "name": "project-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "PERCY_TOKEN=${PT_PROJECT_2} npx percy exec -- node index.js"
+  },
+  "dependencies": {
+    "project-1":"^1.0.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
