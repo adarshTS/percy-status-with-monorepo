@@ -33,7 +33,9 @@ async function MarkStatus(projectSlug,SHA){
         context:`percy/${projectSlug}`
     },{
         headers:{
-            Authorization:`Bearer ${GITHUB_TOKEN}`
+            Accept:"application/vnd.github+json",
+            Authorization:`Bearer ${GITHUB_TOKEN}`,
+            "X-GitHub-Api-Version":"2022-11-28"
         }
     }).catch((err)=>{
         console.log(err)
