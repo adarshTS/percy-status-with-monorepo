@@ -26,6 +26,8 @@ async function GetCommitId(){
 
 async function MarkStatus(projectSlug,SHA){
     let endpoint = `https://api.github.com/repos/${REPO}/statuses/${SHA})`
+    console.log(endpoint)
+    console.log(GITHUB_TOKEN)
     return axios.post(endpoint,{
         state:'success',
         context:`percy/${projectSlug}`
@@ -33,6 +35,8 @@ async function MarkStatus(projectSlug,SHA){
         headers:{
             Authorization:`Bearer ${GITHUB_TOKEN}`
         }
+    }).catch((err)=>{
+        console.log(err)
     })
 }
 

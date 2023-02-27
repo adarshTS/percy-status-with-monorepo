@@ -14,7 +14,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run tests
-        run: npx nx affected --target=test
+        run: npx nx affected --target=test --parallel=1
         env:
           PT_PROJECT_1: ${{ secrets.PT_PROJECT_1 }}
           PT_PROJECT_2: ${{ secrets.PT_PROJECT_2 }}
