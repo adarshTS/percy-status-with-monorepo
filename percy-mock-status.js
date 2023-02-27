@@ -20,6 +20,7 @@ async function GetAffected(){
 
 async function MarkStatus(projectSlug){
     let endpoint = `https://api.github.com/repos/${REPO}/statuses/${SHA})`
+    console.log(endpoint)
     return fetch(endpoint,{
         headers:{
             Accept:"application/vnd.github+json",
@@ -30,6 +31,8 @@ async function MarkStatus(projectSlug){
             state:'success',
             context:`percy/${projectSlug}`
         })
+    }).then(async (res)=>{
+        console.log(await res.text())
     })
 }
 
