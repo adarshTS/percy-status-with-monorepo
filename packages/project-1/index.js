@@ -8,7 +8,7 @@ export async function RunTest(){
   ).build();
 
   try {
-    await driver.get('https://browserstack.com/');
+    await driver.get('https://browserstack.com');
     await percySnapshot(driver, 'HomePage');
 
     await driver.get('https://browserstack.com/docs');
