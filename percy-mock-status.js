@@ -41,7 +41,6 @@ async function MarkStatus(projectSlug){
     let affectedProjects = affected.projects
     let allProjects = affected.projectGraph.nodes
     let unaffectedProjects = allProjects.filter((p)=>!affectedProjects.some((q)=>p ==q));
-    let SHA = await GetCommitId() 
 
     unaffectedProjects.forEach((project)=>{
         MarkStatus(project)
