@@ -1,6 +1,9 @@
 import {exec} from 'child_process'
 import axios from 'axios'
 import dotenv from 'dotenv'
+import Fetch from 'node-fetch'
+
+global.fetch = Fetch
 dotenv.config()
 
 const GITHUB_TOKEN = process.env.SECRET_TOKEN
@@ -17,22 +20,16 @@ async function GetAffected(){
 
 async function MarkStatus(projectSlug){
     let endpoint = `https://api.github.com/repos/${REPO}/statuses/${SHA})`
-    console.log(endpoint)
-    console.log(GITHUB_TOKEN)
-    return axios.post(endpoint,{
-        state:'success',
-        context:`percy/${projectSlug}`
-    },{
+    return fetch(endpoint,{
         headers:{
             Accept:"application/vnd.github+json",
             Authorization:`Bearer ${GITHUB_TOKEN}`,
             "X-GitHub-Api-Version":"2022-11-28"
         },
-        transformRequest:[
-            ...axios.defaults.transformRequest
-        ]
-    }).catch((err)=>{
-        console.log(err)
+        body:JSON.stringify({
+            state:'success',
+            context:`percy/${projectSlug}`
+        })
     })
 }
 
