@@ -24,3 +24,4 @@ jobs:
         env:
           SECRET_TOKEN: ${{ secrets.SECRET_TOKEN }}
           REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}

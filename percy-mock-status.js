@@ -5,7 +5,7 @@ dotenv.config()
 
 const GITHUB_TOKEN = process.env.SECRET_TOKEN
 const REPO = process.env.REPO
-
+const SHA = process.env.SHA
 async function GetAffected(){
     return new Promise((resolve,reject)=>{
         exec('npx nx print-affected',(err,result)=>{
@@ -15,16 +15,7 @@ async function GetAffected(){
     })
 }
 
-async function GetCommitId(){
-    return new Promise((resolve,reject)=>{
-        exec('git rev-parse --verify HEAD',(err,commitId)=>{
-            if(err) reject(err)
-            resolve(commitId)
-        })
-    })
-}
-
-async function MarkStatus(projectSlug,SHA){
+async function MarkStatus(projectSlug){
     let endpoint = `https://api.github.com/repos/${REPO}/statuses/${SHA})`
     console.log(endpoint)
     console.log(GITHUB_TOKEN)
@@ -36,7 +27,10 @@ async function MarkStatus(projectSlug,SHA){
             Accept:"application/vnd.github+json",
             Authorization:`Bearer ${GITHUB_TOKEN}`,
             "X-GitHub-Api-Version":"2022-11-28"
-        }
+        },
+        transformRequest:[
+            ...axios.defaults.transformRequest
+        ]
     }).catch((err)=>{
         console.log(err)
     })
@@ -50,6 +44,6 @@ async function MarkStatus(projectSlug,SHA){
     let SHA = await GetCommitId() 
 
     unaffectedProjects.forEach((project)=>{
-        MarkStatus(project,SHA)
+        MarkStatus(project)
     })
 })()
