@@ -1,11 +1,14 @@
 import {exec} from 'child_process'
 import axios from 'axios'
 import dotenv from 'dotenv'
+import Fetch from 'node-fetch'
+
+global.fetch = Fetch
 dotenv.config()
 
 const GITHUB_TOKEN = process.env.SECRET_TOKEN
 const REPO = process.env.REPO
-
+const SHA = process.env.SHA
 async function GetAffected(){
     return new Promise((resolve,reject)=>{
         exec('npx nx print-affected',(err,result)=>{
@@ -15,24 +18,21 @@ async function GetAffected(){
     })
 }
 
-async function GetCommitId(){
-    return new Promise((resolve,reject)=>{
-        exec('git rev-parse --verify HEAD',(err,commitId)=>{
-            if(err) reject(err)
-            resolve(commitId)
-        })
-    })
-}
-
-async function MarkStatus(projectSlug,SHA){
+async function MarkStatus(projectSlug){
     let endpoint = `https://api.github.com/repos/${REPO}/statuses/${SHA})`
-    return axios.post(endpoint,{
-        state:'success',
-        context:`percy/${projectSlug}`
-    },{
+    console.log(endpoint)
+    return fetch(endpoint,{
         headers:{
-            Authorization:`Bearer ${GITHUB_TOKEN}`
-        }
+            Accept:"application/vnd.github+json",
+            Authorization:`Bearer ${GITHUB_TOKEN}`,
+            "X-GitHub-Api-Version":"2022-11-28"
+        },
+        body:JSON.stringify({
+            state:'success',
+            context:`percy/${projectSlug}`
+        })
+    }).then(async (res)=>{
+        console.log(await res.text())
     })
 }
 
@@ -41,9 +41,8 @@ async function MarkStatus(projectSlug,SHA){
     let affectedProjects = affected.projects
     let allProjects = affected.projectGraph.nodes
     let unaffectedProjects = allProjects.filter((p)=>!affectedProjects.some((q)=>p ==q));
-    let SHA = await GetCommitId() 
 
     unaffectedProjects.forEach((project)=>{
-        MarkStatus(project,SHA)
+        MarkStatus(project)
     })
 })()

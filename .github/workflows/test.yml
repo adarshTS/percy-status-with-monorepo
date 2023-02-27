@@ -10,21 +10,18 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 18
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: v1/${{ runner.os }}/node-18/${{ hashFiles('**/package-lock.lock') }}
-          restore-keys: v1/${{ runner.os }}/node-18/
+      - uses: nrwl/nx-set-shas@v3
       - name: Install dependencies
-        run: npm i
-      - name: Run tests
-        run: npx nx affected --target=test
-        env:
-          PT_PROJECT_1: ${{ secrets.PT_PROJECT_1 }}
-          PT_PROJECT_2: ${{ secrets.PT_PROJECT_2 }}
-          PT_PROJECT_3: ${{ secrets.PT_PROJECT_3 }}
+        run: npm ci
       - name: Mark Percy State for Unaffected Projects
         run: npm run percy:mark:unaffected
         env:
           SECRET_TOKEN: ${{ secrets.SECRET_TOKEN }}
           REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+      - name: Run tests
+        run: npx nx affected --target=test --parallel=1
+        env:
+          PT_PROJECT_1: ${{ secrets.PT_PROJECT_1 }}
+          PT_PROJECT_2: ${{ secrets.PT_PROJECT_2 }}
+          PT_PROJECT_3: ${{ secrets.PT_PROJECT_3 }}
