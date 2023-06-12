@@ -2,6 +2,8 @@
 
 ## SETUP ENVIRONMENT VARIABLES
 
+Forked from BrowserStackCE org.
+
 You need to setup following secrets for Github Actions
 PT_PROJECT_1 - This is your percy token for project 1
 PT_PROJECT_2 - This is your percy token for project 2
