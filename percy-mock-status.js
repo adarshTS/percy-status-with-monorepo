@@ -9,6 +9,7 @@ dotenv.config()
 const GITHUB_TOKEN = process.env.PERCY_MONO_REPO_GIT_TOKEN
 const REPO = process.env.REPO
 const SHA = process.env.SHA
+
 async function GetAffected(){
     return new Promise((resolve,reject)=>{
         exec('npx nx print-affected',(err,result)=>{
