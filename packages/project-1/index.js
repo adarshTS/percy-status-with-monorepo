@@ -13,6 +13,10 @@ export async function RunTest(){
 
     await driver.get('https://browserstack.com/docs');
     await percySnapshot(driver, 'DocsPage');
+
+    await driver.get('https://www.browserstack.com/pricing');
+    await percySnapshot(driver, 'Pricing');
+
   } finally {
     await driver.quit();
   }
