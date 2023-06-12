@@ -24,7 +24,7 @@ async function MarkStatus(projectSlug){
     return fetch(endpoint,{
         headers:{
             Accept:"application/vnd.github+json",
-            Authorization:`Bearer ${GITHUB_TOKEN}`,
+            Authorization:`Bearer ${$PERCY_MONO_REPO_GIT_TOKEN}`,
             "X-GitHub-Api-Version":"2022-11-28"
         },
         body:JSON.stringify({
