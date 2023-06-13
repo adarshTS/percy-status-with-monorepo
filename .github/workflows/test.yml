@@ -19,6 +19,10 @@ jobs:
           SECRET_TOKEN: ${{ secrets.PERCY_MONO_REPO_GIT_TOKEN }}
           REPO: ${{ github.repository }}
           SHA: ${{ github.sha }}
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: '114'    
       - name: Run tests
         run: npx nx affected --target=test --parallel=1
         # env:
