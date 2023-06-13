@@ -22,7 +22,7 @@ jobs:
       - name: Set up Chrome
         uses: browser-actions/setup-chrome@v1
         with:
-          chrome-version: '114'    
+          chrome-version: '113.0.0'    
       - name: Run tests
         run: npx nx affected --target=test --parallel=1
         # env:
