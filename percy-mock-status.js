@@ -6,9 +6,10 @@ import Fetch from 'node-fetch'
 global.fetch = Fetch
 dotenv.config()
 
-const GITHUB_TOKEN = process.env.SECRET_TOKEN
+const GITHUB_TOKEN = process.env.PERCY_MONO_REPO_GIT_TOKEN
 const REPO = process.env.REPO
 const SHA = process.env.SHA
+
 async function GetAffected(){
     return new Promise((resolve,reject)=>{
         exec('npx nx print-affected',(err,result)=>{
@@ -24,7 +25,7 @@ async function MarkStatus(projectSlug){
     return fetch(endpoint,{
         headers:{
             Accept:"application/vnd.github+json",
-            Authorization:`Bearer ${$PERCY_MONO_REPO_GIT_TOKEN}`,
+            Authorization:`Bearer ${GITHUB_TOKEN}`,
             "X-GitHub-Api-Version":"2022-11-28"
         },
         body:JSON.stringify({
