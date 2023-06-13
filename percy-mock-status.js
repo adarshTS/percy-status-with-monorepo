@@ -23,6 +23,7 @@ async function MarkStatus(projectSlug){
     let endpoint = `https://api.github.com/repos/${REPO}/statuses/${SHA})`
     console.log(endpoint)
     return fetch(endpoint,{
+        method: "POST",
         headers:{
             Accept:"application/vnd.github+json",
             Authorization:`Bearer ${GITHUB_TOKEN}`,
