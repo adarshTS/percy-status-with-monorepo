@@ -21,7 +21,7 @@ export async function RunTest(){
     await percySnapshot(driver, 'Sign in Page');
 
     await driver.get('https://www.browserstack.com/users/sign_up');
-    await percySnapshot(driver, 'SignUP Page'); 
+    await percySnapshot(driver, 'Signup Page'); 
 
   } finally {
     await driver.quit();
