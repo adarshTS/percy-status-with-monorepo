@@ -14,11 +14,8 @@ import chrome from 'selenium-webdriver/chrome.js'
 
     await driver.get('https://browserstack.com/docs/');
     await percySnapshot(driver, 'DocsPage');
-
-    await driver.get('https://www.browserstack.com/percy');
-    await percySnapshot(driver, 'PERCY Page');
-
-  } finally {
+  } 
+  finally {
     await driver.quit();
   }
 })();
