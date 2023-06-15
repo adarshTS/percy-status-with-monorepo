@@ -21,4 +21,4 @@ SECRET_TOKEN - This is your github access token
 
 * Create a pull request and your should see that on affected projects have a percy build running while unaffected projects will have a checkmark for percy.
 
-SHA?.
+SHA?...
