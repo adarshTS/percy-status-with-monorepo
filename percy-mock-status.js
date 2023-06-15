@@ -19,7 +19,7 @@ async function GetAffected() {
   });
 }
 
-async function MarkStatus(projectSlug) {
+async function MarkStatus(project_slug) {
   let endpoint = `https://api.github.com/repos/${REPO}/statuses/${SHA}`;
   console.log(endpoint);
   return fetch(endpoint, {
@@ -31,7 +31,7 @@ async function MarkStatus(projectSlug) {
     },
     body: JSON.stringify({
       state: 'success',
-      context: `percy/${projectSlug}`,
+      context: `percy/${project_slug}`,
     }),
   })
     .then(async (res) => {
