@@ -6,7 +6,7 @@ import Fetch from 'node-fetch';
 global.fetch = Fetch;
 dotenv.config();
 
-const GITHUB_TOKEN = process.env.PERCY_MONO_REPO_GIT_TOKEN;
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO = process.env.REPO;
 const SHA = process.env.SHA;
 
