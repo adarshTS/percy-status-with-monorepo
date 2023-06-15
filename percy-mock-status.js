@@ -19,27 +19,27 @@ async function GetAffected() {
   });
 }
 
-async function MarkStatus(project_slug) {
+async function MarkStatus(projectSlug) {
   let endpoint = `https://api.github.com/repos/${REPO}/statuses/${SHA}`;
   console.log(endpoint);
-  return fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/vnd.github+json',
-      Authorization: `Bearer ${GITHUB_TOKEN}`,
-      'X-GitHub-Api-Version': '2022-11-28',
-    },
-    body: JSON.stringify({
-      state: 'success',
-      context: `percy/${project_slug}`,
-    }),
-  })
-    .then(async (res) => {
-      console.log(await res.text());
-    })
-    .catch((error) => {
-      console.error(error);
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/vnd.github+json',
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+      body: JSON.stringify({
+        state: 'success',
+        context: `percy/${projectSlug}`,
+      }),
     });
+
+    console.log(await response.text());
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 (async () => {
@@ -50,7 +50,7 @@ async function MarkStatus(project_slug) {
     (p) => !affectedProjects.some((q) => p == q)
   );
 
-  unaffectedProjects.forEach((project) => {
-    MarkStatus(project);
-  });
+  for (let project of unaffectedProjects) {
+    await MarkStatus(project);
+  }
 })();
