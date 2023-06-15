@@ -34,8 +34,6 @@ async function MarkStatus(projectSlug){
         })
     }).then(async (res)=>{
         console.log(await res.text())
-        console.log(res.status)
-        console.log(await res.json()) 
     })
 }
 
