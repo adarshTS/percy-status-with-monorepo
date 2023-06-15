@@ -16,7 +16,7 @@ jobs:
       - name: Mark Percy State for Unaffected Projects
         run: npm run percy:mark:unaffected
         env:
-          SECRET_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SECRET_TOKEN: ${{ secrets.PERCY_MONO_REPO_GIT_TOKEN }}
           REPO: ${{ github.repository }}
           SHA: ${{ github.sha }}
       - name: Set up Chrome
