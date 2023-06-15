@@ -39,11 +39,11 @@ async function MarkStatus(projectSlug){
 
 (async ()=>{
     let affected = await GetAffected()
-    let affectedProjects = affected.projects
-    let allProjects = affected.projectGraph.nodes
-    let unaffectedProjects = allProjects.filter((p)=>!affectedProjects.some((q)=>p ==q));
+    let affectedProjects = await affected.projects
+    let allProjects = await affected.projectGraph.nodes
+    let unaffectedProjects = await allProjects.filter((p)=>!affectedProjects.some((q)=>p ==q));
 
-    unaffectedProjects.forEach((project)=>{
+    await unaffectedProjects.forEach((project)=>{
         MarkStatus(project)
     })
 })()
