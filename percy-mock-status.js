@@ -24,7 +24,7 @@ async function MarkStatus(project_slug) {
   console.log(endpoint);
   try {
     const response = await fetch(endpoint, {
-      method: 'POST',
+      method: 'GET',
       headers: {
         Accept: 'application/vnd.github+json',
         Authorization: `Bearer ${GITHUB_TOKEN}`,
