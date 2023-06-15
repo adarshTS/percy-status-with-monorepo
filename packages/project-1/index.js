@@ -17,7 +17,7 @@ export async function RunTest(){
     await driver.get('https://www.browserstack.com/pricing');
     await percySnapshot(driver, 'Pricing');
 
-    await driver.get('https://www.browserstack.com/users/sign_up');
+    await driver.get('https://www.browserstack.com/users/sign_in');
     await percySnapshot(driver, 'Sign up Page');
 
   } finally {
