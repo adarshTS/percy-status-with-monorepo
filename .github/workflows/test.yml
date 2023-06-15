@@ -25,8 +25,8 @@ jobs:
           chrome-version: 'stable'    
       - name: Run tests
         run: npx nx affected --target=test --parallel=1
-        # env:
-        #   PT_PROJECT_1: ${{ secrets.PT_PROJECT_1 }}
-        #   PT_PROJECT_2: ${{ secrets.PT_PROJECT_2 }}
-        #   PT_PROJECT_3: ${{ secrets.PT_PROJECT_3 }}
+        env:
+          PT_PROJECT_1: ${{ secrets.PT_PROJECT_1 }}
+          PT_PROJECT_2: ${{ secrets.PT_PROJECT_2 }}
+          PT_PROJECT_3: ${{ secrets.PT_PROJECT_3 }}
         

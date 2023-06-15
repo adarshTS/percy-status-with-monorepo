@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "PERCY_TOKEN=web_22df3c6c87d6dad437415d0c00d75e8af57d1bb288d9c8a7e197642690044db0 npx percy exec -- node index.js"
+    "test": "PERCY_TOKEN=${PT_PROJECT_3} npx percy exec -- node index.js"
   },
   "keywords": [],
   "author": "",

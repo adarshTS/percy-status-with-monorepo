@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "PERCY_TOKEN=web_066c63d5c39d29168bb4d4ee70f88ac407f63da031307432051cb273d88f4faf npx percy exec -- node index.js"
+    "test": "PERCY_TOKEN=${PT_PROJECT_2} npx percy exec -- node index.js"
   },
   "dependencies": {
     "project-1":"^1.0.0"
