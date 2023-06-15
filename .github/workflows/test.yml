@@ -12,7 +12,7 @@ jobs:
           node-version: 18
       - uses: nrwl/nx-set-shas@v3
       - name: Install dependencies
-        run: npm i
+        run: npm ci
       - name: Mark Percy State for Unaffected Projects
         run: npm run percy:mark:unaffected
         env:
